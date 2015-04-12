@@ -1,0 +1,62 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Frontend.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/bootstrap-theme.min.css" rel="stylesheet" />
+<%--    <link href="../css/bootstrap1.min.css" rel="stylesheet" />--%>
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <link href="css/CustomCss.min.css" rel="stylesheet" />
+    <link href="../css/bootstrap-lightbox.css" rel="stylesheet" />
+</head>
+<body>
+    <form id="form1" runat="server">
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="Default.aspx"><asp:Literal runat="server" ID="litSiteName"></asp:Literal></a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <asp:Literal runat="server" ID="litNavbarDropdown" />
+
+
+                    </ul>
+
+
+
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+        <div class="container-fluid ">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+       
+        </div>
+        
+             
+            <p class="well well-sm text-center">Test@test.dk - 23332332 - test.dk</p>
+       
+    </form>
+</body>
+</html>
