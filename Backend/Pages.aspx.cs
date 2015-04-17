@@ -59,8 +59,16 @@ public partial class Backend_Pages : System.Web.UI.Page
     protected void btnCreateCategory_OnClick(object sender, EventArgs e)
     {
         PageModel.PageCategory pageCategory = new PageModel.PageCategory();
-        pageCategory.Name = txtCategoryName.Text;
-        pageRepository.CreatePageCategory(pageCategory);
-        Response.Redirect(Request.RawUrl);
+        if (txtCategoryName.Text == "")
+        {
+            litWarning.Text = Bootstrap.Alert("Please choose a category name.", 4);
+        }
+        else
+        {
+            pageCategory.Name = txtCategoryName.Text;
+            pageRepository.CreatePageCategory(pageCategory);
+            Response.Redirect(Request.RawUrl);
+        }
+     
     }
 }

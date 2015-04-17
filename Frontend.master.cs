@@ -16,7 +16,8 @@ public partial class MasterPage : System.Web.UI.MasterPage
             var pageCategory = pageRepository.ReadPageCategory().FirstOrDefault(pc=>pc.Id == category.Id);
             var pageResult = pageRepository.ReadPages().Where(p => p.PageCategories == pageCategory);
             var firstOrDefault = pageRepository.ReadPages().FirstOrDefault(p => p.PageCategories.Id == category.Id);
-            
+              var settings = settingRepo.Read().First();
+        litSiteName.Text =  settings.SiteName;
             if (firstOrDefault != null)
             {
                 var pageId = firstOrDefault.Id;
@@ -37,12 +38,30 @@ public partial class MasterPage : System.Web.UI.MasterPage
                     }
                     litNavbarDropdown.Text += "</ul></li>";
 
+                   
+                }
+
+              
+                if (settings.OpeningModel)
+                {
+                    litNavbarDropdown.Text += "<li><a href='OpeningHours.aspx'>Opening Hours</a></li>";
+                }
+                if (settings.PriceModel)
+                {
+                    litNavbarDropdown.Text += "<li><a href='Prices.aspx'>Prices</a></li>";
+                }
+                if (settings.ProductModel)
+                {
+                    litNavbarDropdown.Text += "<li><a href='Products.aspx'>Products</a></li>";
+                }
+                if (settings.ContactModel)
+                {
+                    litNavbarDropdown.Text += "<li><a href='Contact.aspx'>Contact</a></li>";
                 }
             }
             
         }
-        var settings = settingRepo.Read().First();
-        litSiteName.Text =  settings.SiteName;
+      
         
     }
 }

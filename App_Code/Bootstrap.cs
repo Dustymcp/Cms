@@ -52,6 +52,12 @@ public class Bootstrap
         return "<img class='img-responsive' src='" + filepath + imagePath + ".ashx?width=" + width + "&height=" + height + "&mode=" + mode + "' />";
     }
 
+    public static string MediaObject(string imagePath, int height, int width, string mode, bool backend)
+    {
+        var filepath = backend ? "../upload/" : "/upload/";
+        return "<img class='media-object' src='" + filepath + imagePath + ".ashx?width=" + width + "&height=" + height + "&mode=" + mode + "' />";
+    }
+
     public static string ShortenContent(string texToShorten, int value)
     {
         return (texToShorten.Length >= value

@@ -45,15 +45,30 @@ public partial class Backend_PagesSingle : System.Web.UI.Page
     protected void btnCreatePage_OnClick(object sender, EventArgs e)
     {
         PageModel.PageTemplate pageTemplate = new PageModel.PageTemplate();
-        pageTemplate.Content = Editor1.Content;
-        pageTemplate.Created = DateTime.Now;
-        pageTemplate.Edited = DateTime.Now;
-        pageTemplate.Creator = "Administrator";
-        var pageCategory = pageRepository.ReadPageCategory().FirstOrDefault(pc => pc.Id == Convert.ToInt32(ddlCategory.SelectedValue));
-        pageTemplate.PageCategories = pageCategory;
-        pageTemplate.Title = txtTitle.Text;
-        pageRepository.CreatePages(pageTemplate);
-        Response.Redirect("Pages.aspx");
+
+        if (Editor1.Content != "" || txtTitle.Text != "")
+        {
+            pageTemplate.Content = Editor1.Content;
+            pageTemplate.Created = DateTime.Now;
+            pageTemplate.Edited = DateTime.Now;
+            pageTemplate.Creator = "Administrator";
+            var pageCategory = pageRepository.ReadPageCategory().FirstOrDefault(pc => pc.Id == Convert.ToInt32(ddlCategory.SelectedValue));
+            pageTemplate.PageCategories = pageCategory;
+            pageTemplate.Title = txtTitle.Text;
+            pageRepository.CreatePages(pageTemplate);
+            Response.Redirect("Pages.aspx");
+        }
+        else if (Editor1.Content == "")
+        {
+
+            litWarning.Text = Bootstrap.Alert("Please insert some content to your page.", 4);
+
+        }
+        else if (txtTitle.Text == "")
+        {
+            litWarning.Text = Bootstrap.Alert("Please insert a title to the page.", 4);
+        }
+
     }
 
     protected void btnEditPage_OnClick(object sender, EventArgs e)
@@ -62,21 +77,35 @@ public partial class Backend_PagesSingle : System.Web.UI.Page
         var id = Convert.ToInt32(Request.QueryString["Id"]);
         var pageTemplate = pageRepository.ReadPages().FirstOrDefault(p => p.Id == id);
         pageTemplate.Content = Editor1.Content;
+        if (Editor1.Content != "" || txtTitle.Text != "")
+        {
+            pageTemplate.Edited = DateTime.Now;
+            pageTemplate.Creator = "Administrator";
+            var pageCategory =
+                pageRepository.ReadPageCategory()
+                    .FirstOrDefault(pc => pc.Id == Convert.ToInt32(ddlCategory.SelectedValue));
+            pageTemplate.PageCategories = pageCategory;
+            pageTemplate.Title = txtTitle.Text;
+            pageRepository.UpdatePage(pageTemplate);
+            litWarning.Text = Bootstrap.Alert("Page Edited", 1);
+        }
+        else if (Editor1.Content == "")
+        {
 
-        pageTemplate.Edited = DateTime.Now;
-        pageTemplate.Creator = "Administrator";
-        var pageCategory = pageRepository.ReadPageCategory().FirstOrDefault(pc => pc.Id == Convert.ToInt32(ddlCategory.SelectedValue));
-        pageTemplate.PageCategories = pageCategory;
-        pageTemplate.Title = txtTitle.Text;
-        pageRepository.UpdatePage(pageTemplate);
-        litWarning.Text = Bootstrap.Alert("Page Edited", 1);
+            litWarning.Text = Bootstrap.Alert("Please insert some content to your page.", 4);
+
+        }
+        else if (txtTitle.Text == "")
+        {
+            litWarning.Text = Bootstrap.Alert("Please insert a title to the page.", 4);
+        }
     }
 
     protected void btnCreateCategory_OnClick(object sender, EventArgs e)
     {
         PageModel.PageCategory pageCategory = new PageModel.PageCategory();
         pageCategory.Name = txtCategoryName.Text;
-       pageRepository.CreatePageCategory(pageCategory);
+        pageRepository.CreatePageCategory(pageCategory);
         Response.Redirect(Request.RawUrl);
     }
 }

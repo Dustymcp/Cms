@@ -25,7 +25,7 @@
             <cc1:Editor ID="Editor1" runat="server" TopToolbarPreservePlace="True" Height="600" />
         </div>
         <asp:Button runat="server" ID="btnCreatePage" OnClick="btnCreatePage_OnClick" Text="Create Page" CssClass="btn btn-block" />
-        <asp:Button runat="server" ID="btnEditPage" OnClick="btnEditPage_OnClick" Text="Edit Page" CssClass="btn btn-block" Visible="false" />
+        <asp:Button runat="server" ID="btnEditPage" OnClick="btnEditPage_OnClick" Text="Save" CssClass="btn btn-block" Visible="false" />
     </div>
     <div class="col-sm-4">
         <h3>Create category</h3>

@@ -12,20 +12,35 @@ public partial class Backend_Images : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        UploadModel.Repository repo = new UploadModel.Repository();
-
-        int idToDelete = Convert.ToInt32(Request.QueryString["Id"]);
-        if (Convert.ToBoolean(Request.QueryString["Delete"]))
+        var repo = new UploadModel.Repository();
+        var productRepo = new ProductsModel.Repository();
+        var id = Convert.ToInt32(Request.QueryString["Id"]);
+        var delete = Convert.ToBoolean(Request.QueryString["Delete"]);
+        if (delete)
         {
-            var imageToDelete = repo.ReadImages().FirstOrDefault(i => i.Id == idToDelete);
-            repo.DeleteImage(imageToDelete);
+            var imageToDelete = repo.ReadImages().FirstOrDefault(i => i.Id == id);
+            var productImageCount = productRepo.Read().Count(pi => imageToDelete != null && pi.Images == imageToDelete.Id);
             if (imageToDelete != null)
             {
-                var fileOnServer = new FileInfo(Server.MapPath(@"~/upload/" + imageToDelete.Filename));
-                fileOnServer.Delete();
+                if (productImageCount == 0)
+                {
+                    var fileOnServer = new FileInfo(Server.MapPath(@"~/upload/" + imageToDelete.Filename));
+                    repo.DeleteImage(imageToDelete);
+                    fileOnServer.Delete();
+                    Response.Redirect(redirectUrl);
+
+                }
+                else
+                {
+                    litWarning.Text = Bootstrap.Alert("Please delete products associated with the image.", 4);
+                }
+
+            }
+            else
+            {
+                litWarning.Text = Bootstrap.Alert("Error occured, the image does not exist. try refreshing the page.", 4);
             }
 
-            Response.Redirect(redirectUrl);
         }
         rptFileOverview.DataSource = repo.ReadImages();
         rptFileOverview.DataBind();

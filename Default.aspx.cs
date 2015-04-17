@@ -31,16 +31,19 @@ public partial class _Default : System.Web.UI.Page
 
         foreach (var product in productRepo.Read().Take(10))
         {
-            var productImage = uploadRepo.ReadImages().FirstOrDefault(i => i.Id == product.Image).Filename;
-            string active = "";
-            if (firstitem)
+            var orDefault = uploadRepo.ReadImages().FirstOrDefault(i => i.Id == product.Images);
+            if (orDefault != null)
             {
-                firstitem = false;
-                active = "active";
+                var productImage = orDefault.Filename;
+                string active = "";
+                if (firstitem)
+                {
+                    firstitem = false;
+                    active = "active";
+                }
+
+                litProducts.Text += "<div class='item " + active + "'> " + "<h3 class='text-center'>" + product.Title + "</h3>" + "<p class='text-center'>" + product.Price + ",-<p>" + Bootstrap.Image(productImage, 700, 900, "crop", true) + "</div>";
             }
-
-            litProducts.Text += "<div class='item " + active + "'> " + "<h3 class='text-center'>" + product.Title + "</h3>" + "<p class='text-center'>" + product.Price + ",-<p>" + Bootstrap.Image(productImage, 700, 900, "crop", true) + "</div>";
-
         }
 
         litOpeningHoursMonday.Text = openhours.Monday;
@@ -51,7 +54,9 @@ public partial class _Default : System.Web.UI.Page
         litOpeningHoursSaturday.Text = openhours.Saturday;
         litOpeningHoursSunday.Text = openhours.Sunday;
         litComment.Text = openhours.Comment;
+
         var prices = new PriceModel.Repository();
+
         foreach (var price in prices.ReadPrices().Take(8))
         {
             litPriceList10.Text += "<li class='list-group-item'>" + price.Product + "<span class='badge'>" + price.Amount + ",- DKK</span></li>";

@@ -9,7 +9,10 @@ public partial class Backend_Settings : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-       
+
+        if (!IsPostBack)
+        {
+
 
             var settingRepo = new SettingsModel.Repository();
             var settings = settingRepo.Read().FirstOrDefault();
@@ -21,38 +24,26 @@ public partial class Backend_Settings : System.Web.UI.Page
                 ddlList.Items.Add(item);
             }
 
-            if (!IsPostBack)
-            {
+            litGoogleMapEmbed.Text = " <iframe src='" + settings.Mapembedlink + "' width='" + settings.Width + "' height='" + settings.Height + "' frameborder='0' style='border: 0'></iframe>";
 
-            if (settings == null)
-            {
-                btnEdit.Visible = false;
-            }
-            else
-            {
-                btnSubmit.Visible = false;
+
+        
                 ddlList.SelectedValue = settings.Image.ToString();
                 txtFooterInfo.Text = settings.FooterInfo;
                 txtPageInfo.Content = settings.PageInfo;
                 txtSiteName.Text = settings.SiteName;
+                chkContacts.Checked = settings.ContactModel;
+                chkOpeningHours.Checked = settings.OpeningModel;
+                chkPriceModel.Checked = settings.PriceModel;
+                chkProducts.Checked = settings.ProductModel;
+                txtEmbedLink.Text = settings.Mapembedlink;
+                txtHeight.Text = settings.Height.ToString();
+                txtWidth.Text = settings.Width.ToString();
+
             }
-        }
+
     }
 
-    protected void btnSubmit_OnClick(object sender, EventArgs e)
-    {
-        var settingRepo = new SettingsModel.Repository();
-        var setting = new SettingsModel.Setting();
-        setting.FooterInfo = txtFooterInfo.Text;
-        setting.PageInfo = txtPageInfo.Content;
-        setting.SiteName = txtSiteName.Text;
-        var id = Convert.ToInt32(ddlList.SelectedValue);
-        var imageRepo = new UploadModel.Repository();
-        var image = imageRepo.ReadImages().FirstOrDefault(i => i.Id == id);
-        setting.Image = image.Id;
-        settingRepo.Create(setting);
-        Response.Redirect(Request.RawUrl);
-    }
 
     protected void btnEdit_OnClick(object sender, EventArgs e)
     {
@@ -61,8 +52,14 @@ public partial class Backend_Settings : System.Web.UI.Page
         setting.FooterInfo = txtFooterInfo.Text;
         setting.PageInfo = txtPageInfo.Content;
         setting.SiteName = txtSiteName.Text;
-        
-        setting.Image =Convert.ToInt32(ddlList.SelectedValue);
+        setting.ContactModel = chkContacts.Checked;
+        setting.OpeningModel = chkOpeningHours.Checked;
+        setting.PriceModel = chkPriceModel.Checked;
+        setting.ProductModel = chkProducts.Checked;
+        setting.Image = Convert.ToInt32(ddlList.SelectedValue);
+        setting.Mapembedlink = txtEmbedLink.Text;
+        setting.Height = Convert.ToInt32(txtHeight.Text);
+        setting.Width = Convert.ToInt32(txtWidth.Text);
         settingRepo.Update(setting);
         Response.Redirect(Request.RawUrl);
 

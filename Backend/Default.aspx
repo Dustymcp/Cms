@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-
+    <h1>Administration</h1>
     <div class="col-sm-4 list-group">
         <div class="list-group-item list-group-item-heading active">Users <span class="badge">
             <asp:Literal runat="server" ID="litUserCount" /></span></div>
@@ -33,7 +33,12 @@
             </a>
         </div>
     </div>
-
+    <div class="col-sm-4">
+        <ul class="media-list">
+            <li class="list-group-item list-group-item-heading active">Latest Products</li>
+            <asp:Literal runat="server" ID="litProductsOverview"/>
+        </ul>
+    </div>
     <div class="col-sm-8 list-group">
         <div  class="list-group-item list-group-item-heading active">Pages<span class="badge "><asp:Literal runat="server" ID="litPageCount" /></span></div>
         <asp:Literal runat="server" ID="litPageLatest"/>

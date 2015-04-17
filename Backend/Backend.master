@@ -15,7 +15,7 @@
     <!-- Latest compiled and minified JavaScript -->
     <%--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>--%>
     <link href="../css/bootstrap-lightbox.css" rel="stylesheet" />
-
+    <link href="../css/CustomCss.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.6/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.6/js/jquery.dataTables.js"></script>
 </head>

@@ -17,11 +17,18 @@ public class SettingsModel
         public string SiteName { get; set; }
         public string PageInfo { get; set; }
         public string FooterInfo { get; set; }
+        public bool ContactModel { get; set; }
+        public bool PriceModel { get; set; }
+        public bool OpeningModel { get; set; }
+        public bool ProductModel { get; set; }
+        public string Mapembedlink { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
     }
 
     public class Repository
     {
-         DatabaseModel _databaseContext = new DatabaseModel();
+        DatabaseModel _databaseContext = new DatabaseModel();
 
         public List<Setting> Read()
         {

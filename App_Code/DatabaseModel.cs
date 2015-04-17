@@ -2,6 +2,7 @@
 using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using Microsoft.WindowsAzure.Storage.Table.Protocol;
 
 /// <summary>
 /// Summary description for DatabaseModel
@@ -61,17 +62,19 @@ public class DatabaseModel : DbContext
             user.UserName = "Admin";
             context.Users.Add(user);
 
-            //PageModel.PageCategory pageCategory = new PageModel.PageCategory();
-            //pageCategory.Name = "Template Category";
-            //context.PageCategories.Add(pageCategory);
+            PageModel.PageCategory pageCategory = new PageModel.PageCategory();
+            pageCategory.Name = "Template Category";
+            context.PageCategories.Add(pageCategory);
 
-            //PageModel.PageTemplate pageTemplate = new PageModel.PageTemplate();
-            //pageTemplate.Content = "This is your content";
-            //pageTemplate.PageCategories = pageCategory;
-            //pageTemplate.Created = new DateTime(2015,05,04);
-            //pageTemplate.Creator = "Admin";
-            //pageTemplate.Title = "Template Page";
-            //context.PageTemplates.Add(pageTemplate);
+            PageModel.PageTemplate pageTemplate = new PageModel.PageTemplate();
+            pageTemplate.Content = "This is your content";
+            pageTemplate.PageCategories = pageCategory;
+            pageTemplate.Created = DateTime.Now;
+            pageTemplate.Edited = DateTime.Now;
+            pageTemplate.Creator = "Admin";
+            pageTemplate.Title = "Template Page";
+            context.PageTemplates.Add(pageTemplate);
+
 
             ContactModel.Mail mail = new ContactModel.Mail();
             mail.Content = "This is a test mail to fill up the inventory abit";
@@ -92,6 +95,13 @@ public class DatabaseModel : DbContext
             
             setting.SiteName = "Template Site";
             setting.Image = 1;
+            setting.OpeningModel = true;
+            setting.PriceModel = true;
+            setting.ContactModel = true;
+            setting.ProductModel = true;
+            setting.Mapembedlink ="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d35560.55761754828!2d10.214217099999999!3d56.14785654999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0000000000000000%3A0x1837916eb88c0de3!2sTivoli+Friheden!5e0!3m2!1sda!2sdk!4v1429060674382";
+            setting.Width = 300;
+            setting.Height = 450;
             context.Setting.Add(setting);
 
             HoursModel.OpeningHours openingHours = new HoursModel.OpeningHours();
@@ -106,14 +116,21 @@ public class DatabaseModel : DbContext
             context.OpeningHours.Add(openingHours);
 
             ProductsModel.Product product = new ProductsModel.Product();
-            product.Image = 1;
+            product.Images = 1;
             product.Comment = "This is a default product listing.";
             product.Price = 234;
             product.Title = "Title";
             
             context.Products.Add(product);
 
+
+            PriceModel.Price price = new PriceModel.Price();
+            price.Product = "Test product";
+            price.Amount = 999;
+            context.Prices.Add(price);
+
             context.SaveChanges();
+
             base.Seed(context);
         }
     }
