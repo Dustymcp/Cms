@@ -15,7 +15,7 @@
     <div class="col-sm-3">
 
         <ul class="list-group">
-            <li class="list-group-item list-group-item-heading active">Åbningstider</li>
+            <li class="list-group-item list-group-item-heading active">Hitler</li>
             <li class="list-group-item">Mandag:
                 <asp:Literal runat="server" ID="litOpeningHoursMonday"></asp:Literal></li>
             <li class="list-group-item">Tirsdag:
