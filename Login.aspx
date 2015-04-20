@@ -7,6 +7,5 @@
     <asp:TextBox ID="txtUsername" runat="server" />
     <asp:TextBox ID="txtUserpass" runat="server" TextMode="Password" />
     <asp:Button ID="btnLogin" runat="server" Text="Login" OnClick="btnLogin_Click" />
-    <p>test</p>
 </asp:Content>
 
