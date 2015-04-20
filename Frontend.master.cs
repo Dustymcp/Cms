@@ -13,11 +13,11 @@ public partial class MasterPage : System.Web.UI.MasterPage
     {
         foreach (var category in pageRepository.ReadPageCategory())
         {
-            var pageCategory = pageRepository.ReadPageCategory().FirstOrDefault(pc=>pc.Id == category.Id);
+            var pageCategory = pageRepository.ReadPageCategory().FirstOrDefault(pc => pc.Id == category.Id);
             var pageResult = pageRepository.ReadPages().Where(p => p.PageCategories == pageCategory);
             var firstOrDefault = pageRepository.ReadPages().FirstOrDefault(p => p.PageCategories.Id == category.Id);
-              var settings = settingRepo.Read().First();
-        litSiteName.Text =  settings.SiteName;
+            var settings = settingRepo.Read().First();
+            litSiteName.Text = settings.SiteName;
             if (firstOrDefault != null)
             {
                 var pageId = firstOrDefault.Id;
@@ -26,7 +26,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
 
                 if (pageCount <= 1)
                 {
-                    litNavbarDropdown.Text += "<li><a href='Pages.aspx?Id=" + pageId  +"'>" + category.Name + "</a></li>";
+                    litNavbarDropdown.Text += "<li><a href='Pages.aspx?Id=" + pageId + "'>" + category.Name + "</a></li>";
                 }
                 else
                 {
@@ -38,10 +38,10 @@ public partial class MasterPage : System.Web.UI.MasterPage
                     }
                     litNavbarDropdown.Text += "</ul></li>";
 
-                   
+
                 }
 
-              
+
                 if (settings.OpeningModel)
                 {
                     litNavbarDropdown.Text += "<li><a href='OpeningHours.aspx'>Opening Hours</a></li>";
@@ -59,10 +59,10 @@ public partial class MasterPage : System.Web.UI.MasterPage
                     litNavbarDropdown.Text += "<li><a href='Contact.aspx'>Contact</a></li>";
                 }
             }
-            
+
         }
-      
-        
+
+
     }
 }
 
