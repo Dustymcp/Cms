@@ -11,64 +11,58 @@ public partial class MasterPage : System.Web.UI.MasterPage
     readonly SettingsModel.Repository settingRepo = new SettingsModel.Repository();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack)
+        foreach (var category in pageRepository.ReadPageCategory())
         {
-
-
-            foreach (var category in pageRepository.ReadPageCategory())
+            var pageCategory = pageRepository.ReadPageCategory().FirstOrDefault(pc=>pc.Id == category.Id);
+            var pageResult = pageRepository.ReadPages().Where(p => p.PageCategories == pageCategory);
+            var firstOrDefault = pageRepository.ReadPages().FirstOrDefault(p => p.PageCategories.Id == category.Id);
+              var settings = settingRepo.Read().First();
+        litSiteName.Text =  settings.SiteName;
+            if (firstOrDefault != null)
             {
-                var pageCategory = pageRepository.ReadPageCategory().FirstOrDefault(pc => pc.Id == category.Id);
-                var pageResult = pageRepository.ReadPages().Where(p => p.PageCategories == pageCategory);
-                var firstOrDefault = pageRepository.ReadPages().FirstOrDefault(p => p.PageCategories.Id == category.Id);
-                var settings = settingRepo.Read().First();
-                litSiteName.Text = settings.SiteName;
-                if (firstOrDefault != null)
+                var pageId = firstOrDefault.Id;
+                var pageTemplates = pageResult as PageModel.PageTemplate[] ?? pageResult.ToArray();
+                var pageCount = pageTemplates.Count();
+
+                if (pageCount <= 1)
                 {
-                    var pageId = firstOrDefault.Id;
-                    var pageTemplates = pageResult as PageModel.PageTemplate[] ?? pageResult.ToArray();
-                    var pageCount = pageTemplates.Count();
+                    litNavbarDropdown.Text += "<li><a href='Pages.aspx?Id=" + pageId  +"'>" + category.Name + "</a></li>";
+                }
+                else
+                {
 
-                    if (pageCount <= 1)
+                    litNavbarDropdown.Text += "<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-expanded='false'>" + category.Name + "<span class='caret'></span></a><ul class='dropdown-menu' role='menu'>";
+                    foreach (var pagetemplate in pageTemplates)
                     {
-                        litNavbarDropdown.Text += "<li><a href='Pages.aspx?Id=" + pageId + "'>" + category.Name + "</a></li>";
+                        litNavbarDropdown.Text += "<li><a href='Pages.aspx?Id=" + pagetemplate.Id + "'>" + pagetemplate.Title + "</a></li>";
                     }
-                    else
-                    {
+                    litNavbarDropdown.Text += "</ul></li>";
 
-                        litNavbarDropdown.Text += "<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-expanded='false'>" + category.Name + "<span class='caret'></span></a><ul class='dropdown-menu' role='menu'>";
-                        foreach (var pagetemplate in pageTemplates)
-                        {
-                            litNavbarDropdown.Text += "<li><a href='Pages.aspx?Id=" + pagetemplate.Id + "'>" + pagetemplate.Title + "</a></li>";
-                        }
-                        litNavbarDropdown.Text += "</ul></li>";
-
-                    }
-
-
-                    if (settings.OpeningModel)
-                    {
-                        litNavbarDropdown.Text += "<li><a href='OpeningHours.aspx'>Opening Hours</a></li>";
-                    }
-
-                    if (settings.PriceModel)
-                    {
-                        litNavbarDropdown.Text += "<li><a href='Prices.aspx'>Prices</a></li>";
-                    }
-
-                    if (settings.ProductModel)
-                    {
-                        litNavbarDropdown.Text += "<li><a href='Products.aspx'>Products</a></li>";
-                    }
-
-                    if (settings.ContactModel)
-                    {
-                        litNavbarDropdown.Text += "<li><a href='Contact.aspx'>Contact</a></li>";
-                    }
+                   
                 }
 
+              
+                if (settings.OpeningModel)
+                {
+                    litNavbarDropdown.Text += "<li><a href='OpeningHours.aspx'>Opening Hours</a></li>";
+                }
+                if (settings.PriceModel)
+                {
+                    litNavbarDropdown.Text += "<li><a href='Prices.aspx'>Prices</a></li>";
+                }
+                if (settings.ProductModel)
+                {
+                    litNavbarDropdown.Text += "<li><a href='Products.aspx'>Products</a></li>";
+                }
+                if (settings.ContactModel)
+                {
+                    litNavbarDropdown.Text += "<li><a href='Contact.aspx'>Contact</a></li>";
+                }
             }
-
+            
         }
+      
+        
     }
 }
 
