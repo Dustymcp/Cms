@@ -4,37 +4,39 @@
     <link href="../css/fileinput.min.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-
+    <script type="text/javascript">   $(document).ready(function () {
+       $("#imageTable").DataTable();
+   });</script>
 
     <asp:Literal runat="server" ID="litWarning" />
-    <div class="col-lg-12">
+    <h1>Upload</h1>
+
+
+    <div class="col-sm-8">
+
+        <table class="table table-bordered" id="imageTable">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Id</th>
+                    <th>Filename</th>
+                    <th>Delete</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <asp:Literal runat="server" ID="litTableImages" />
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-sm-4 well">
+        <h3>Fileupload</h3>
+        <p>It is possible to upload multiple files, just dont upload files over 3mb pr file. images cant be larger than 3200x3200</p>
+        <p>*Remember to only upload image files, png|jpeg|gif|jpg</p>
         <asp:FileUpload ID="fileUpload" runat="server" AllowMultiple="True" CssClass="file-input-new" />
         <br />
         <asp:Button ID="btnSubmitFiles" runat="server" OnClick="btnSubmitFiles_OnClick" Text="Upload" CssClass="btn btn-default" />
     </div>
-    <div class="divider">&nbsp;</div>
-    <asp:Repeater ID="rptFileOverview" runat="server">
-        <HeaderTemplate>
-        </HeaderTemplate>
-        <ItemTemplate>
-
-
-            <div class=" col-sm-2">
-                <div class="well">
-
-                    <a href="Images.aspx?Id=<%#Eval("Id") %>&Delete=true"><span class="glyphicon glyphicon-remove"></span></a>
-
-                    <a href="ImagesSingle.aspx?Id=<%#Eval("Id") %>">
-                        <img src="../upload/<%#Eval("Filename") %>.ashx?w=200&h=200&mode=stretch" class="img-thumbnail" style="border: 1px solid black;" /></a>
-                    <p></p>
-
-                </div>
-            </div>
-
-        </ItemTemplate>
-        <FooterTemplate>
-        </FooterTemplate>
-    </asp:Repeater>
-
 </asp:Content>
 

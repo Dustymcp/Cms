@@ -42,8 +42,14 @@ public partial class Backend_Images : System.Web.UI.Page
             }
 
         }
-        rptFileOverview.DataSource = repo.ReadImages();
-        rptFileOverview.DataBind();
+
+
+
+
+        foreach (var image in repo.ReadImages())
+        {
+            litTableImages.Text += "<tr><td>" + Bootstrap.Image(image.Filename, 200, 200, "crop", true) + "</td><td>" + image.Id + "</td><td>" + image.Filename + "</td><td><a href='images.aspx?id=" + image.Id + "&Delete=true'><span class='glyphicon glyphicon-remove-sign icon-lg'></span></a></td></tr>";  
+        }
     }
 
     protected void btnSubmitFiles_OnClick(object sender, EventArgs e)

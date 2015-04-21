@@ -10,8 +10,16 @@
 span.glyphicon-menu-left {
   font-size: 5em;
 }
+<<<<<<< HEAD
 
 *{
     border-radius: 0 !important;
+=======
+.icon-lg {
+  font-size: 1.5em;
+}
+.icon-sm {
+  font-size: 1em;
+>>>>>>> origin/centralbar
 }
 /*# sourceMappingURL=CustomCss.css.map */
