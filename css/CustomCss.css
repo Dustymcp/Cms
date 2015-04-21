@@ -10,4 +10,8 @@
 span.glyphicon-menu-left {
   font-size: 5em;
 }
+
+*{
+    border-radius: 0 !important;
+}
 /*# sourceMappingURL=CustomCss.css.map */
