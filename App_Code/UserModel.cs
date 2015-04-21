@@ -52,9 +52,7 @@ public class UserModel
 
         User userToValidate = dbContext.Users.FirstOrDefault(u => u.UserName == user.UserName);
         if (userToValidate == null)
-            return false;
-
-        else
+            return false;       
         {
             bool isUserValidated = Compare(user.HashedPassword, userToValidate.HashedPassword);
 

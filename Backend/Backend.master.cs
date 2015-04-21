@@ -17,19 +17,19 @@ public partial class backend_Backend : MasterPage
         var contactRepo = new ContactModel.Repository();
         var contactUnreadMail = contactRepo.ReadMail().Count(m => m.Watched == false);
         litNrofUnreadmail.Text = contactUnreadMail.ToString();
-        int sessionId = Convert.ToInt32(Session["Id"]);
-        int sessionLevel = Convert.ToInt32(Session["Level"]);
+        //int sessionId = Convert.ToInt32(Session["Id"]);
+        //int sessionLevel = Convert.ToInt32(Session["Level"]);
 
 
-        if (Session["Username"] == null)
-            Response.Redirect("../login.aspx");
-        else
-        {
-            string sessionUsername = Session["Username"].ToString();
-            LitNavbarUsername.Text = sessionUsername;
-        }
+        //if (Session["Username"] == null)
+        //    Response.Redirect("../login.aspx");
+        //else
+        //{
+        //    string sessionUsername = Session["Username"].ToString();
+        //    LitNavbarUsername.Text = sessionUsername;
+        //}
 
-        if (sessionLevel != 1)
-            Response.Redirect("../login.aspx");
+        //if (sessionLevel != 1)
+        //    Response.Redirect("../login.aspx");
     }
 }
