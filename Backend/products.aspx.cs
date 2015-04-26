@@ -16,6 +16,7 @@ public partial class Backend_products : System.Web.UI.Page
 
         var edit = Convert.ToBoolean(Request.QueryString["Edit"]);
         var id = Convert.ToInt32(Request.QueryString["Id"]);
+        var delete = Convert.ToBoolean(Request.QueryString["Delete"]);
         if (!IsPostBack)
         {
 
@@ -40,6 +41,12 @@ public partial class Backend_products : System.Web.UI.Page
                 ddlImages.SelectedValue = productToEdit.Images.ToString();
                 btnSubmitProduct.Visible = false;
                 btnEditProduct.Visible = true;
+            }
+            if (delete)
+            {
+                var productToEdit = productsRepository.Read().FirstOrDefault(p => p.Id == id);
+                productsRepository.Delete(productToEdit);
+                Response.Redirect("products.aspx");
             }
         }
     }
