@@ -49,7 +49,7 @@ public class Bootstrap
     public static string Image(string imagePath, int height, int width, string mode, bool backend)
     {
         var filepath = backend ? "../upload/" : "/upload/";
-        return "<img class='img-responsive' src='" + filepath + imagePath + ".ashx?width=" + width + "&height=" + height + "&mode=" + mode + "' />";
+        return "<img class='img-responsive img-border' src='" + filepath + imagePath + ".ashx?width=" + width + "&height=" + height + "&mode=" + mode + "' />";
     }
 
     public static string MediaObject(string imagePath, int height, int width, string mode, bool backend)
