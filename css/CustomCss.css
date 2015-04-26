@@ -10,6 +10,9 @@
 * {
   border-radius: 0 !important;
 }
+.img-border {
+  border: 2px solid #ccccca;
+}
 span.glyphicon-menu-left {
   font-size: 5em;
 }
