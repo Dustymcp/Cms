@@ -42,7 +42,7 @@ public partial class _Default : System.Web.UI.Page
                     active = "active";
                 }
 
-                litProducts.Text += "<div class='item " + active + "'> " + "<h3 class='text-center'>" + product.Title + "</h3>" + "<p class='text-center'>" + product.Price + ",-<p>" + Bootstrap.Image(productImage, 700, 900, "crop", true) + "</div>";
+                litProducts.Text += "<div class='item " + active + "'> " + "<div class='carousel-caption'><h3 class='text-center'>" + product.Title + "</h3>" + "<p class='text-center'>" + product.Price + ",-</p></div>" + Bootstrap.Image(productImage, 400, 600, "crop", true) + "</div>";
             }
         }
 
