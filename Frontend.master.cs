@@ -64,6 +64,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
                     {
                         litNavbarDropdown.Text += "<li><a href='Contact.aspx'>Contact</a></li>";
                     }
+                    litPageFooter.Text += settings.FooterInfo;
                 }
 
             }
