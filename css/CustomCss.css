@@ -22,4 +22,7 @@ span.glyphicon-menu-left {
 .icon-sm {
   font-size: 1em;
 }
+.active {
+  color: #000 !important;
+}
 /*# sourceMappingURL=CustomCss.css.map */
