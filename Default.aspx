@@ -102,5 +102,8 @@
             </div>
         </div>
     </div>
+        <div class="col-sm-12 text-center">
+            <a href="#" ><img src="img/facebook.png"/></a>
+        </div>
 </asp:Content>
 

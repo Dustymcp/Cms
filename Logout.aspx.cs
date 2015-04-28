@@ -4,16 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Microsoft.Ajax.Utilities;
 
-public partial class Backend_Prices : System.Web.UI.Page
+public partial class Logout : System.Web.UI.Page
 {
-    PriceModel.Repository priceRepository = new PriceModel.Repository();
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        Session.Clear();
     }
-
-
-
 }

@@ -25,4 +25,7 @@ span.glyphicon-menu-left {
 .active {
   color: #000 !important;
 }
+.carousel-caption {
+  text-shadow: 2px 2px 2px #000 !important;
+}
 /*# sourceMappingURL=CustomCss.css.map */

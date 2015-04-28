@@ -35,7 +35,11 @@ public class PriceModel
         public void DeletePrice(Price price)
         {
             var PriceToDelete = ReadPrices().FirstOrDefault(p => p.Id == price.Id);
-            _databaseContext.Prices.Remove(PriceToDelete);
+            if (_databaseContext != null)
+            {
+                _databaseContext.Prices.Remove(PriceToDelete);
+                _databaseContext.SaveChanges();
+            }
         }
 
         public void UpdatePrice(Price price)

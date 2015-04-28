@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div class="col-sm-offset-4 col-sm-4 well">
+    <div class="col-sm-offset-4 col-sm-4">
         <h1 class="text-center">Login</h1>
         <asp:Literal ID="litWarning" runat="server" />
         <div class="form-group">

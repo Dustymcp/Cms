@@ -52,9 +52,8 @@
         <div class="container ">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
-            <a href="#"><img src="img/facebook.png"/></a>
         </div>
-
+    
          <div style="min-height: 65px;">
 </div>
         <div class="navbar navbar-default navbar-fixed-bottom text-center">

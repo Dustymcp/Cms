@@ -4,6 +4,7 @@ using System.Web.UI;
 
 public partial class backend_Backend : MasterPage
 {
+    UserModel.Repository userRepository = new UserModel.Repository();
     protected void Page_Load(object sender, EventArgs e)
     {
         SettingsModel.Repository settings = new SettingsModel.Repository();
@@ -17,19 +18,23 @@ public partial class backend_Backend : MasterPage
         var contactRepo = new ContactModel.Repository();
         var contactUnreadMail = contactRepo.ReadMail().Count(m => m.Watched == false);
         litNrofUnreadmail.Text = contactUnreadMail.ToString();
-        //int sessionId = Convert.ToInt32(Session["Id"]);
-        //int sessionLevel = Convert.ToInt32(Session["Level"]);
+        litBrandText.Text += Session["Level"];
+        int sessionId = Convert.ToInt32(Session["UserId"]);
+        UserModel.User validatedUser = userRepository.ShowUsers().FirstOrDefault(u => u.Id == sessionId);
+        if (validatedUser == null)
+        {
+            Response.Redirect("../Login.aspx");
+        }
+        if (validatedUser.UserLevel != 1)
+        {
+            Response.Redirect("../Login.aspx");
+        }
+        else
+        {
+            LitNavbarUsername.Text = validatedUser.FirstName;
+        }
 
 
-        //if (Session["Username"] == null)
-        //    Response.Redirect("../login.aspx");
-        //else
-        //{
-        //    string sessionUsername = Session["Username"].ToString();
-        //    LitNavbarUsername.Text = sessionUsername;
-        //}
 
-        //if (sessionLevel != 1)
-        //    Response.Redirect("../login.aspx");
     }
 }

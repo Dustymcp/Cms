@@ -49,11 +49,11 @@ public class UserModel
     public static bool ValidateUser(User user)
     {
         DatabaseModel dbContext = new DatabaseModel();
-
+        
         User userToValidate = dbContext.Users.FirstOrDefault(u => u.UserName == user.UserName);
         if (userToValidate == null)
             return false;       
-        {
+        else {
             bool isUserValidated = Compare(user.HashedPassword, userToValidate.HashedPassword);
 
             return isUserValidated;
